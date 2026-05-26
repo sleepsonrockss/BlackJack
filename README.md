@@ -38,7 +38,6 @@ Total: 10 × 10 × 2 = 200 possible states
 - **+1**: Win
 - **0**: Draw
 - **-1**: Lose
-## Installation
 
 # Q-Learning
  
