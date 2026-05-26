@@ -38,10 +38,45 @@ Total: 10 × 10 × 2 = 200 possible states
 - **+1**: Win
 - **0**: Draw
 - **-1**: Lose
-## Installation
+
+# Q-Learning
  
-### Requirements
-- Python 3.7+
-- gymnasium
-- numpy
-- matplotlib (optional, for visualization)
+## Overview
+ 
+Q-learning is a **model-free reinforcement learning algorithm** that learns the value of actions in states to find an optimal policy. It learns a function Q(s, a) that estimates the expected cumulative discounted reward of taking action `a` in state `s`.
+ 
+## The Update Rule
+ 
+The core update equation is:
+ 
+```
+Q(s, a) ← Q(s, a) + α [r + γ max_a' Q(s', a') - Q(s, a)]
+```
+ 
+Where:
+- `α` is the learning rate
+- `r` is the immediate reward
+- `γ` is the discount factor (0 to 1)
+- `s'` is the next state
+- `max_a' Q(s', a')` is the maximum Q-value in the next state
+The term `[r + γ max_a' Q(s', a') - Q(s, a)]` is the **temporal difference error**.
+ 
+## Key Characteristics
+ 
+- **Off-policy**: Learns the optimal policy while following an exploratory policy
+- **Model-free**: No need for a model of environment dynamics
+- **Convergence**: Guaranteed to converge to optimal Q-values under appropriate conditions
+- **Discrete spaces**: Works best with discrete states and actions
+## Exploration Strategy
+ 
+Q-learning requires balancing exploration and exploitation. The most common approach is **ε-greedy**:
+- With probability `ε`, choose a random action
+- With probability `1 - ε`, choose the action with the highest Q-value
+## Convergence
+ 
+Q-learning converges to the optimal action-value function Q* if:
+1. Every state-action pair is visited infinitely often
+2. The learning rate α decreases appropriately
+3. Rewards are bounded
+From the optimal Q-values, the optimal policy is simply: **π*(s) = argmax_a Q(s, a)**
+ 
